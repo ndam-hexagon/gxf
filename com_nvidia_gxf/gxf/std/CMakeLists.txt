@@ -221,6 +221,7 @@ target_link_libraries(std
         GXF::common
         GXF::core
         GXF::std_internal
+        dlpack::dlpack
 )
 add_library(GXF::std ALIAS std)
 set(GXF_EXTENSION_LIBRARY_TARGETS "std;${GXF_EXTENSION_LIBRARY_TARGETS}" PARENT_SCOPE)
