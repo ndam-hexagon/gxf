@@ -17,7 +17,7 @@
 gxf_core_add_extension_library(
     NAME test_cuda
     SOURCES test_cuda_ext.cpp
-    PUBLIC_HEADERS test_cuda_helper.hpp
+    PUBLIC_HEADERS test_cuda_helper.hpp convolution.h
     PUBLIC_DEPENDS
         CUDA::cublas
         GXF::cuda
@@ -26,6 +26,18 @@ gxf_core_add_extension_library(
         GXF::std
         GTest::gtest_main
     NO_INSTALL
+)
+
+install(
+  TARGETS test_cuda
+  PUBLIC_HEADER
+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gxf/cuda/tests
+  ARCHIVE
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/gxf/cuda/tests
+  LIBRARY
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/gxf/cuda/tests
+  COMPONENT test
+  COMPONENT test
 )
 
 gxf_add_gtests(
