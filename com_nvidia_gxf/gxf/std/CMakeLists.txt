@@ -111,6 +111,7 @@ set(GXF_STD_INTERNAL_PUBLIC_HEADERS
     graph_driver.hpp
     graph_driver_worker_common.hpp
     graph_worker.hpp
+    ipc_client.hpp
     ipc_server.hpp
     job_statistics.hpp
     memory_buffer.hpp
