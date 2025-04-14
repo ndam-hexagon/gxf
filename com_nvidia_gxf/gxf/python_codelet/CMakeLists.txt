@@ -41,7 +41,7 @@ set_target_properties(pydata_pybind PROPERTIES OUTPUT_NAME "pydata_pybind" PREFI
 target_link_libraries(pydata_pybind PUBLIC GXF::core GXF::std)
 
 install(
-    TARGETS pycodelet;pydata_pybind
+    TARGETS pydata_pybind
     EXPORT gxfCoreTargets
     PUBLIC_HEADER
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gxf/multimedia
@@ -49,5 +49,17 @@ install(
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/gxf/multimedia
     LIBRARY
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/gxf/multimedia
+    COMPONENT Core
+)
+
+install(
+    TARGETS pycodelet
+    EXPORT gxfCoreTargets
+    PUBLIC_HEADER
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gxf/python_codelet
+    ARCHIVE
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/gxf/python_codelet
+    LIBRARY
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/gxf/python_codelet
     COMPONENT Core
 )
