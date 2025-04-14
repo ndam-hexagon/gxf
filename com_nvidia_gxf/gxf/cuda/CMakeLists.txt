@@ -46,7 +46,8 @@ gxf_core_add_extension_library(
 # Pybind11 extensions
 #######################################################################################
 
-pybind11_add_module(cuda_pybind SHARED "bindings/cuda.cpp")
+pybind11_add_module(cuda_pybind SHARED WITHOUT_SOABI "bindings/cuda.cpp")
+set_target_properties(cuda_pybind PROPERTIES OUTPUT_NAME "cuda_pybind" PREFIX "")
 target_link_libraries(cuda_pybind PUBLIC GXF::common GXF::core GXF::std CUDA::cudart)
 
 

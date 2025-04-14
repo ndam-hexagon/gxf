@@ -32,10 +32,12 @@ gxf_core_add_extension_library(
 # Pybind11 extensions
 #######################################################################################
 
-pybind11_add_module(pycodelet SHARED "bindings/pycodelet.cpp")
+pybind11_add_module(pycodelet SHARED WITHOUT_SOABI "bindings/pycodelet.cpp")
+set_target_properties(pycodelet PROPERTIES OUTPUT_NAME "pycodelet" PREFIX "")
 target_link_libraries(pycodelet PUBLIC GXF::core GXF::std GXF::python_codelet)
 
-pybind11_add_module(pydata_pybind SHARED "bindings/pydata.cpp")
+pybind11_add_module(pydata_pybind SHARED WITHOUT_SOABI "bindings/pydata.cpp")
+set_target_properties(pydata_pybind PROPERTIES OUTPUT_NAME "pydata_pybind" PREFIX "")
 target_link_libraries(pydata_pybind PUBLIC GXF::core GXF::std)
 
 install(

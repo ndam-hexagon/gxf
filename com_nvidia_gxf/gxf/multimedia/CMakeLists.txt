@@ -33,10 +33,12 @@ gxf_core_add_extension_library(
 # Pybind11 extensions
 #######################################################################################
 
-pybind11_add_module(video_pybind SHARED "bindings/video.cpp")
+pybind11_add_module(video_pybind SHARED WITHOUT_SOABI "bindings/video.cpp")
+set_target_properties(video_pybind PROPERTIES OUTPUT_NAME "video_pybind" PREFIX "")
 target_link_libraries(video_pybind PUBLIC GXF::core GXF::std)
 
-pybind11_add_module(camera_pybind SHARED "bindings/camera.cpp")
+pybind11_add_module(camera_pybind SHARED WITHOUT_SOABI "bindings/camera.cpp")
+set_target_properties(camera_pybind PROPERTIES OUTPUT_NAME "camera_pybind" PREFIX "")
 target_link_libraries(camera_pybind PUBLIC GXF::core GXF::std)
 
 install(
