@@ -13,20 +13,47 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-gxf_core_add_extension_library(
-    NAME python_codelet
-    SOURCES
-        py_codelet.cpp
-        python_codelet.cpp
-    PUBLIC_HEADERS
+set(GXF_PYTHON_CODELET_SOURCES py_codelet.cpp python_codelet.cpp)
+set(GXF_PYTHON_CODELET_HEADERS
         pydata.hpp
         py_codelet.hpp
-    PUBLIC_DEPENDS
+)
+add_library(python_codelet SHARED
+    ${GXF_PYTHON_CODELET_SOURCES}
+)
+set_target_properties(python_codelet
+  PROPERTIES
+    OUTPUT_NAME "gxf_python_codelet"
+    PUBLIC_HEADER "${GXF_PYTHON_CODELET_HEADERS}"
+    INSTALL_RPATH "$ORIGIN:$ORIGIN/../core:$ORIGIN/../std"
+)
+target_include_directories(python_codelet
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}>
+        $<INSTALL_INTERFACE:include>
+)
+target_link_libraries(python_codelet
+    PUBLIC
         GXF::core
         GXF::std
         pybind11::pybind11
         Python3::Python
 )
+add_library(GXF::python_codelet ALIAS python_codelet)
+
+include(GNUInstallDirs)
+install(
+    TARGETS python_codelet
+    EXPORT gxfCoreTargets
+    PUBLIC_HEADER
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gxf/python_codelet
+    ARCHIVE
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/gxf/python_codelet
+    LIBRARY
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/gxf/python_codelet
+    COMPONENT python_codelet
+)
+set(GXF_EXTENSION_LIBRARY_TARGETS "python_codelet;${GXF_EXTENSION_LIBRARY_TARGETS}" PARENT_SCOPE)
 
 #######################################################################################
 # Pybind11 extensions
